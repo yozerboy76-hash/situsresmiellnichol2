@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>DARMA & ELLNICHOL SHOP | AUTO-MUSIC SCROLL & TOUCH</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: Inter + Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: radial-gradient(circle at 10% 30%, #0a0f1e, #03060c);
+            font-family: 'Inter', 'Poppins', sans-serif;
+            color: #eef5ff;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(0, 255, 255, 0.08), transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .badge-luxury {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(0, 150, 255, 0.1);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(0, 200, 255, 0.6);
+            box-shadow: 0 0 8px rgba(0, 200, 255, 0.3);
+            padding: 0.5rem 1.8rem;
+            border-radius: 60px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff, #3b82f6, #06b6d4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+            text-shadow: 0 0 15px rgba(59,130,246,0.3);
+        }
+
+        .sub {
+            color: #9ab3d5;
+            font-size: 1.1rem;
+            border-bottom: 1px dashed #2c4f7a;
+            display: inline-block;
+            padding-bottom: 6px;
+        }
+
+        .services-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .service-card {
+            background: rgba(8, 28, 48, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .service-card:hover {
+            transform: translateY(-3px);
+            border-color: #3b82f6;
+            box-shadow: 0 0 20px rgba(59,130,246,0.4), 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .card-header {
+            background: linear-gradient(95deg, #0f2b3f, #081c2c);
+            padding: 1rem 1.8rem;
+            border-bottom: 1px solid #1e4a76;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .card-header i {
+            font-size: 1.6rem;
+            color: #3b82f6;
+            text-shadow: 0 0 5px #3b82f6;
+        }
+
+        .card-header h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .card-body {
+            padding: 1rem 1.8rem;
+        }
+
+        .price-list {
+            list-style: none;
+        }
+
+        .price-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 0.8rem 0;
+            border-bottom: 1px dashed rgba(59,130,246,0.2);
+            font-weight: 500;
+        }
+
+        .price-list li span:first-child {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .price-list li span:first-child i {
+            width: 24px;
+            color: #3b82f6;
+        }
+
+        .price-tag {
+            background: #0a2a3f;
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-family: monospace;
+            font-weight: 700;
+            color: #7ab7ff;
+            border: 1px solid rgba(59,130,246,0.4);
+        }
+
+        .free-req {
+            color: #a0f0ff;
+            font-size: 0.8rem;
+            margin-top: 8px;
+            text-align: right;
+            font-style: italic;
+        }
+
+        .wa-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.8rem;
+            margin: 2.5rem 0 1.5rem;
+        }
+
+        .wa-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(95deg, #075e54, #0a7c6e);
+            padding: 0.9rem 2rem;
+            border-radius: 60px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: 0.2s;
+            box-shadow: 0 0 10px rgba(37, 211, 102, 0.4);
+            border: 1px solid #25d366;
+        }
+
+        .wa-btn i {
+            font-size: 1.6rem;
+        }
+
+        .wa-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 20px #25d366;
+            background: #075e54;
+        }
+
+        .testimoni-note {
+            background: #071a28a0;
+            border-radius: 2rem;
+            padding: 1rem;
+            text-align: center;
+            margin: 1.5rem 0;
+            border: 1px solid #1e4a76;
+        }
+
+        .footer-music {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            gap: 1rem;
+            border-top: 1px solid #1e4a76;
+        }
+
+        .music-control {
+            background: #0e2a3a;
+            padding: 8px 15px;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .music-control button {
+            background: none;
+            border: none;
+            color: #3b82f6;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        audio {
+            display: none;
+        }
+
+        @media (max-width: 650px) {
+            body {
+                padding: 1rem;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            .card-header h2 {
+                font-size: 1.1rem;
+            }
+            .price-list li {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+            }
+            .wa-btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="hero">
+        <div class="badge-luxury">
+            <i class="fas fa-code-branch"></i> ALL PELAYANAN SERVICES 
+            <i class="fas fa-crown" style="color: #facc15;"></i>
+        </div>
+        <h1>DARMA & ELLINCHOL</h1>
+        <div class="sub">
+            <i class="fas fa-terminal"></i> Build · Mapping · Server · Script · Premium
+        </div>
+        <p style="margin-top: 1rem; color: #bbd4ff;">✨ tunggu apa lagi? yuk pilihan ada di bawah. hidup hanya sekali tak bisa dua kali  kematian/ajal tidak bisa di tebak jadi rajinlah beribadah bismillah ✨</p>
+    </div>
+
+    <div class="services-list">
+        <!-- 1. BUILD MODPACK -->
+        <div class="service-card">
+            <div class="card-header">
+                <i class="fas fa-cubes"></i>
+                <h2>📦 1. JASA BUILD MODPACK</h2>
+            </div>
+            <div class="card-body">
+                <ul class="price-list">
+                    <li><span><i class="fas fa-box"></i> Build Modpack Dari Kami</span> <span class="price-tag">15K</span></li>
+                    <li><span><i class="fas fa-clipboard-list"></i> Build Modpack Request Kamu</span> <span class="price-tag">25K</span></li>
+                </ul>
+                <div class="free-req">✅ Bebas request & garansi rapi</div>
+            </div>
+        </div>
+
+        <!-- 2. MAPING & PASANG -->
+        <div class="service-card">
+            <div class="card-header">
+                <i class="fas fa-map-marked-alt"></i>
+                <h2>🗺️ 2. JASA MAPING & PASANG</h2>
+            </div>
+            <div class="card-body">
+                <ul class="price-list">
+                    <li><span><i class="fas fa-tree"></i> Exterior 50 Object</span> <span class="price-tag">10K</span></li>
+                    <li><span><i class="fas fa-city"></i> Exterior 150 Object</span> <span class="price-tag">25K</span></li>
+                    <li><span><i class="fas fa-draw-polygon"></i> Exterior 250 Object</span> <span class="price-tag">35K</span></li>
+                    <li><span><i class="fas fa-mountain"></i> Exterior 300 Object</span> <span class="price-tag">100K</span></li>
+                </ul>
+                <div class="free-req">🎯 BEBAS REQUEST (interior/exterior) + pasangin</div>
+            </div>
+        </div>
+
+        <!-- 3. ONLINE SERVER -->
+        <div class="service-card">
+            <div class="card-header">
+                <i class="fas fa-server"></i>
+                <h2>🌐 3. JASA ONLINE SERVER</h2>
+            </div>
+            <div class="card-body">
+                <ul class="price-list">
+                    <li><span><i class="fas fa-fire"></i> GM INFERNO</span> <span class="price-tag">5K</span></li>
+                    <li><span><i class="fas fa-dragon"></i> GM LRP</span> <span class="price-tag">10K</span></li>
+                </ul>
+                <div class="free-req">⚡ Fast respon, stabil 24 jam</div>
+            </div>
+        </div>
+
+        <!-- 4. PASANG VOICE -->
+        <div class="service-card">
+            <div class="card-header">
+                <i class="fas fa-microphone-alt"></i>
+                <h2>🎙️ 4. JASA PASANG VOICE KE GM</h2>
+            </div>
+            <div class="card-body">
+                <ul class="price-list">
+                    <li><span><i class="fas fa-headset"></i> Pasang Voice (custom/request)</span> <span class="price-tag">15K</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 5. RENAME GM -->
+        <div class="service-card">
+            <div class="card-header">
+                <i class="fas fa-pen-nib"></i>
+                <h2>✏️ 5. JASA RENAME GM</h2>
+            </div>
+            <div class="card-body">
+                <ul class="price-list">
+                    <li><span><i class="fas fa-tag"></i> LRP</span> <span class="price-tag">10K</span></li>
+                    <li><span><i class="fas fa-fire"></i> INFERNO</span> <span class="price-tag">5K</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 6. TEXTRAW NAME SERVER -->
+        <div class="service-card">
+            <div class="card-header">
+                <i class="fas fa-text-height"></i>
+                <h2>🖋️ 6. TEXTRAW NAME SERVER</h2>
+            </div>
+            <div class="card-body">
+                <ul class="price-list">
+                    <li><span><i class="fas fa-i-cursor"></i> Buat Textdraw Name Server</span> <span class="price-tag">15K</span></li>
+                    <li><span><i class="fas fa-sync-alt"></i> Ganti TD Server</span> <span class="price-tag">5K</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 7. BUAT SKIN -->
+        <div class="service-card">
+            <div class="card-header">
+                <i class="fas fa-user-astronaut"></i>
+                <h2>👕 7. BUAT SKIN</h2>
+            </div>
+            <div class="card-body">
+                <ul class="price-list">
+                    <li><span><i class="fas fa-palette"></i> Skin Request (Desain dari kami)</span> <span class="price-tag">20K</span></li>
+                    <li><span><i class="fas fa-upload"></i> Skin Punyamu (kita convert+pasang)</span> <span class="price-tag">10K</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOMBOL WA PREMIUM DOUBLE + LOGO -->
+    <div class="wa-buttons">
+        <a href="https://wa.me/6283168782994?text=Halo%20Admin%2C%20saya%20mau%20order%20jasa%20(DARMA%20%26%20ELLINCHOL)" target="_blank" class="wa-btn">
+            <i class="fab fa-whatsapp"></i> Admin 1 : +62 831-6878-2994
+        </a>
+        <a href="https://wa.me/6283173119138?text=Halo%20kak%2C%20saya%20minat%20sama%20services%20kalian" target="_blank" class="wa-btn">
+            <i class="fab fa-whatsapp"></i> Admin 2 : +62 831-7311-9138
+        </a>
+    </div>
+
+    <div class="testimoni-note">
+        <i class="fas fa-comment-dots"></i> UNTUK TESTIMONI BISA CHAT LANGSUNG KE ADMIN YA! <br>
+        <span style="font-size: 0.8rem;">⭐ pelayanan cepat · garansi · semua jasa lengkap ⭐</span>
+    </div>
+
+    <div class="footer-music">
+        <div class="music-control">
+            <i class="fas fa-music" style="color:#3b82f6"></i>
+            <span id="musicLabel">🎧 Admin Ijin Galau (sentuh/scroll)</span>
+            <button id="stopMusicBtn"><i class="fas fa-stop"></i> Stop</button>
+            <small style="font-size:10px;">IJIN GALAUNYA</small>
+        </div>
+        <div>
+            <i class="fas fa-shield-alt"></i> SHOP 📦 • DARMA & ELLINCHOL 
+        </div>
+    </div>
+    
+    <!-- HANYA 1 AUDIO: musik galau murni -->
+    <audio id="bgAudio" loop preload="auto">
+        <source src="https://files.catbox.moe/k41101.mp3" type="audio/mpeg">
+    </audio>
+</div>
+
+<script>
+    (function() {
+        const bgAudio = document.getElementById('bgAudio');
+        const stopBtn = document.getElementById('stopMusicBtn');
+        const musicLabel = document.getElementById('musicLabel');
+        let musicStarted = false;
+        let scrollTimeout = null;
+        
+        // Fungsi untuk mulai musik (TANPA suara klik apapun)
+        function startMusicOnly() {
+            if (!musicStarted) {
+                bgAudio.volume = 0.5;
+                bgAudio.play().then(() => {
+                    musicStarted = true;
+                    musicLabel.innerHTML = '🎵 ADMIN IZIN GALAU';
+                }).catch(e => {
+                    console.log("Autoplay butuh interaksi pertama");
+                });
+            }
+            // efek neon flash (tetap ada, tapi tanpa suara)
+            document.body.style.transition = '0.08s';
+            document.body.style.textShadow = '0 0 5px #3b82f6';
+            setTimeout(() => { document.body.style.textShadow = ''; }, 100);
+        }
+        
+        // 1. SENTUHAN / KLIK APAPUN
+        document.body.addEventListener('click', function(e) {
+            startMusicOnly();
+        });
+        
+        // 2. SCROLL KE BAWAH (pakai throttle)
+        window.addEventListener('scroll', function() {
+            if (scrollTimeout) return;
+            scrollTimeout = setTimeout(() => {
+                startMusicOnly();
+                scrollTimeout = null;
+            }, 150);
+        });
+        
+        // 3. SENTUHAN DI HP
+        document.body.addEventListener('touchstart', function() {
+            startMusicOnly();
+        });
+        
+        // Tombol stop untuk menghentikan musik
+        stopBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            bgAudio.pause();
+            bgAudio.currentTime = 0;
+            musicStarted = false;
+            musicLabel.innerHTML = '⏹ Berhenti (scroll/sentuh untuk nyala)';
+        });
+        
+        // Custom music via console (opsional)
+        window.customMusic = function(url) {
+            if (url) {
+                bgAudio.src = url;
+                bgAudio.load();
+                if (musicStarted) {
+                    bgAudio.play();
+                }
+                console.log("%c🎵 MUSIC CUSTOM UPDATED!", "color:#3b82f6");
+            }
+        };
+        
+        console.log("%c🔥 DARMA & ELLINCHOL | PURE MUSIC MODE - NO CLICK SOUND 🔥", "color: #3b82f6; font-size:13px;");
+        console.log("%cGanti lagu: customMusic('https://files.catbox.moe/k41101.mp3')", "color:#0f0");
+    })();
+</script>
+</body>
+</html>
